@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"              
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:local="clr-namespace:ListViewMAUI"
+             x:Class="ListViewMAUI.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:FeedbackViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <syncfusion:SfListView x:Name="feedbackList" 
+                            SelectionMode="None" 
+                            ItemsSource="{Binding Feedbacks}" 
+                            ItemSpacing="20" 
+                            AutoFitMode="DynamicHeight">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="Feedback">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding QNo}"/>
+                        <Grid x:Name="QA" Grid.Column="1" RowSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Question}" Grid.Row="0" FontSize="16"/>
+
+                            <Entry Text="{Binding Answer}" IsVisible="{Binding IsDetailedFeedback}" Grid.Row="1"/>
+
+                            <buttons:SfRadioGroup x:Name="radioGroup" Grid.Row="1" SelectedValue="{Binding SelectedValue}"
+        BindableLayout.ItemsSource="{Binding Answers}" >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <buttons:SfRadioButton
+        Text="{Binding Answer}" IsChecked="{Binding IsChecked}" />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </buttons:SfRadioGroup>
+
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+
+        <Button Text="Submit" Grid.Row="1" Command="{Binding SubmitCommand}" HeightRequest="40" HorizontalOptions="End" Margin="20"/>
+        
+    </Grid>
+</ContentPage>
