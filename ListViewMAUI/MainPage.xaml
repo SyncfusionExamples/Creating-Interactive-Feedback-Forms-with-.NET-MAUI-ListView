@@ -10,6 +10,12 @@
         <local:FeedbackViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:VisibilityConverter x:Key="VisibilityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -37,7 +43,7 @@
 
                             <Entry Text="{Binding Answer}" IsVisible="{Binding IsDetailedFeedback}" Grid.Row="1"/>
 
-                            <buttons:SfRadioGroup x:Name="radioGroup" Grid.Row="1" SelectedValue="{Binding SelectedValue}"
+                            <buttons:SfRadioGroup x:Name="radioGroup" Grid.Row="1" SelectedValue="{Binding SelectedValue}" IsVisible="{Binding IsDetailedFeedback,Converter={StaticResource VisibilityConverter}}"
         BindableLayout.ItemsSource="{Binding Answers}" >
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate>
