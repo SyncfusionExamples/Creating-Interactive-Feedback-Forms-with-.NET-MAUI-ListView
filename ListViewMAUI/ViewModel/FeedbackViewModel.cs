@@ -49,12 +49,12 @@ namespace ListViewMAUI
             foreach (var feedback in Feedbacks)
             {
                 feedback.Answer = string.Empty;  
-                feedback.SelectedValue = string.Empty;
+                feedback.SelectedValue = null;
                 if (feedback.Answers != null)
                 {
                     foreach (var answer in feedback.Answers)
                     {
-                        answer.IsChecked = null;
+                        answer.IsChecked = false;
                     }
                 }
             }
